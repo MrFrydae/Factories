@@ -1,0 +1,69 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'dev.frydae'
+version '0.0.1'
+
+repositories {
+    mavenCentral()
+
+    maven {
+        name 'maven-frydae'
+        url 'https://maven.frydae.dev/releases'
+    }
+}
+
+dependencies {
+    implementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.1'
+    implementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.1'
+    implementation group: 'org.junit.platform', name: 'junit-platform-runner', version: '1.6.0'
+    implementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.8.1'
+
+    implementation group: 'com.google.guava', name: 'guava', version: '31.1-jre'
+    implementation group: 'org.javatuples', name: 'javatuples', version: '1.2'
+    implementation group: 'org.jetbrains', name: 'annotations', version: '16.0.2'
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
+
+    implementation group: 'org.reflections', name: 'reflections', version: '0.9.11'
+}
+
+test {
+    useJUnitPlatform()
+
+    maxHeapSize = '1G'
+}
+
+java {
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release.set 17
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "frydaeRepository"
+            url = "https://maven.frydae.dev/releases"
+            credentials(PasswordCredentials)
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
+    }
+
+    publications {
+        maven(MavenPublication) {
+            groupId = project.group
+            artifactId = "factories"
+            version = project.version
+            from components.java
+        }
+    }
+}
