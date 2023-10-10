@@ -4,14 +4,14 @@ plugins {
 }
 
 group 'dev.frydae'
-version '0.0.1'
+version '0.0.1-SNAPSHOT'
 
 repositories {
     mavenCentral()
 
     maven {
-        name 'maven-frydae'
-        url 'https://maven.frydae.dev/releases'
+        name = "frydae-repo"
+        url = uri("https://repo.frydae.dev/repository/maven-snapshots/")
     }
 }
 
@@ -49,8 +49,8 @@ tasks.withType(JavaCompile).configureEach {
 publishing {
     repositories {
         maven {
-            name = "frydaeRepository"
-            url = "https://maven.frydae.dev/releases"
+            name = "frydaeNexus"
+            url = "https://nexus.frydae.dev/repository/maven-snapshots/"
             credentials(PasswordCredentials)
             authentication {
                 basic(BasicAuthentication)
