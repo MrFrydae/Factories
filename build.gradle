@@ -8,6 +8,9 @@ version '0.0.1-SNAPSHOT'
 
 rootProject.name='factories'
 
+sourceCompatibility = 17
+targetCompatibility = 17
+
 repositories {
     mavenCentral()
 
@@ -27,8 +30,8 @@ dependencies {
     implementation group: 'org.javatuples', name: 'javatuples', version: '1.2'
     implementation group: 'org.jetbrains', name: 'annotations', version: '16.0.2'
 
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
-    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.34'
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.34'
 
     implementation group: 'org.reflections', name: 'reflections', version: '0.9.11'
 }
