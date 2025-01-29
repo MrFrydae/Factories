@@ -12,11 +12,6 @@ targetCompatibility = 17
 
 repositories {
     mavenCentral()
-
-    maven {
-        name = "frydae-repo"
-        url = uri("https://repo.frydae.dev/repository/maven-snapshots/")
-    }
 }
 
 dependencies {
@@ -48,26 +43,4 @@ java {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
     options.release.set 17
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "frydaeNexus"
-            url = "https://nexus.frydae.dev/repository/maven-snapshots/"
-            credentials(PasswordCredentials)
-            authentication {
-                basic(BasicAuthentication)
-            }
-        }
-    }
-
-    publications {
-        maven(MavenPublication) {
-            groupId = project.group
-            artifactId = "factories"
-            version = project.version
-            from components.java
-        }
-    }
 }
